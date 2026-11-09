@@ -4,7 +4,7 @@
 (function () {
   const N = window.NEXUS, h = N.h, S = N.state;
   const DEF_ACCENT = '#ff2a3d';
-  const DEFAULTS = { theme: 'ultron', accent: DEF_ACCENT, seed: 7, wall: 'live', cursor: true, wm: 'fixed', icons: true, perf: 'auto', welcome: true, askPass: true, name: 'anyelo', uses: [], pins: ['notes', 'ide', 'media', 'browser', 'learn', 'winapps', 'settings'], surveyDone: false };
+  const DEFAULTS = { theme: 'ultron', accent: DEF_ACCENT, seed: 7, wall: 'live', cursor: true, wm: 'fixed', icons: true, perf: 'auto', welcome: true, askPass: true, name: '', uses: [], pins: ['notes', 'ide', 'media', 'browser', 'learn', 'winapps', 'settings'], surveyDone: false };
   const cfg = () => (S.settings ||= {}), get = (k) => (cfg()[k] ?? DEFAULTS[k]);
   N.cfg = cfg; N.get = get; N.DEFAULTS = DEFAULTS;
   N.set = (patch) => { Object.assign(cfg(), patch); N.applySettings(); N.save(); };
@@ -175,11 +175,11 @@
 
   N.survey = function () {
     return new Promise((resolve) => {
-      const a = { name: get('name'), uses: [], theme: get('theme'), accent: get('accent'), wm: get('wm'), icons: get('icons'), perf: get('perf'), welcome: get('welcome'), wall: get('wall') };
+      const a = { name: get('name') || '', uses: [], theme: get('theme'), accent: get('accent'), wm: get('wm'), icons: get('icons'), perf: get('perf'), welcome: get('welcome'), wall: get('wall') };
       const preview = () => { Object.assign(cfg(), { theme: a.theme, accent: a.accent, wm: a.wm, icons: a.icons, wall: a.wall }); N.applySettings(); };
       const opt = (ic, title, desc, on, fn, extra) => h('button', { type: 'button', class: 'sv-opt' + (on ? ' on' : ''), onclick: fn }, extra || h('span', { class: 'sv-ic' }, ic), h('div', {}, h('b', {}, title), desc ? h('small', {}, desc) : ''));
       const STEPS = [
-        { t: '¿Cómo quieres que te llame?', p: 'Aparecerá en el menú Inicio y en los saludos.', r: () => h('input', { class: 'lk-in sv-in', value: a.name, maxlength: 24, oninput: (e) => { a.name = e.target.value; } }) },
+        { t: '¿Cómo quieres que te llame?', p: 'Aparecerá en el menú Inicio y en los saludos.', r: () => h('input', { class: 'lk-in sv-in', value: a.name, placeholder: 'Tu nombre', maxlength: 24, oninput: (e) => { a.name = e.target.value; } }) },
         { t: '¿Para qué vas a usar NEXUS OS?', p: 'Elige todo lo que quieras: colocaré esos programas en tu escritorio.', multi: true, r: (redraw) => h('div', { class: 'sv-grid' }, USES.map(([k, l, ic]) => opt(ic, l, '', a.uses.includes(k), () => { a.uses = a.uses.includes(k) ? a.uses.filter((x) => x !== k) : [...a.uses, k]; redraw(); }))) },
         { t: '¿Qué estilo prefieres?', p: 'Se aplica al instante para que lo veas.', r: (redraw) => h('div', { class: 'sv-grid' }, THEMES.map(([k, l, d, sw]) => opt('', l, d, a.theme === k, () => { a.theme = k; preview(); redraw(); }, h('span', { class: 'sv-sw', style: { background: `linear-gradient(135deg,${sw[0]} 55%,${sw[1]} 55%)` } })))) },
         { t: 'Elige tu color', p: 'Es el color de botones, bordes y resaltados.', r: (redraw) => h('div', { class: 'sv-colors' }, ACCENTS.map((c) => h('button', { type: 'button', class: 'sv-dot' + (a.accent === c ? ' on' : ''), style: { background: c }, title: c, onclick: () => { a.accent = c; preview(); redraw(); } }))) },
@@ -200,7 +200,7 @@
         const uses = a.uses.length ? a.uses : ['all'];
         const apps = [...new Set(USES.filter(([k]) => uses.includes(k)).flatMap((u) => u[3]))];
         const ORDER = ['notes', 'ide', 'media', 'browser', 'learn'];
-        Object.assign(cfg(), { name: a.name.trim() || 'anyelo', uses, theme: a.theme, accent: a.accent, wm: a.wm, icons: a.icons, perf: a.perf, welcome: a.welcome, wall: a.wall, pins: [...ORDER.filter((k) => apps.includes(k)), 'winapps', 'settings'], surveyDone: true });
+        Object.assign(cfg(), { name: a.name.trim() || (N.who ? N.who.name : N.user().name), uses, theme: a.theme, accent: a.accent, wm: a.wm, icons: a.icons, perf: a.perf, welcome: a.welcome, wall: a.wall, pins: [...ORDER.filter((k) => apps.includes(k)), 'winapps', 'settings'], surveyDone: true });
         N.applySettings(); N.save(); ov.classList.add('out'); setTimeout(() => ov.remove(), 400); resolve();
       }
       document.body.append(ov); draw();

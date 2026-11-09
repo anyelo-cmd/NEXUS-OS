@@ -182,7 +182,7 @@ Empezar por la Fase 0: git, esquema de estado versionado y limpieza del README. 
 - **Ventanas fijas:** al abrirse se maximizan y no se arrastran; el lienzo se bloquea mientras haya una visible. Utilidades pequeñas como diálogos centrados. Modo *Libres* opcional.
 - **Barra de tareas tipo Windows:** Inicio, buscador, botones de ventana con estado activo (clic = enfocar/minimizar), bandeja (red, zoom, rendimiento, ayuda, configuración) y reloj con fecha que abre el Calendario.
 - **Aspecto profesional y legible:** ventanas, menús y barra con fondo sólido; se eliminaron las líneas de escaneo y el barrido que se dibujaban encima del contenido y el efecto glitch.
-- **Inicio de sesión** (anyelo / 123456789, hash PBKDF2, bloqueo tras 5 intentos), bloqueo de pantalla y cerrar sesión.
+- **Inicio de sesión** (cuenta local, hash PBKDF2, bloqueo tras 5 intentos), bloqueo de pantalla y cerrar sesión.
 - **Encuesta única** de personalización (7 preguntas, vista previa en vivo) y **panel de Configuración** (5 secciones).
 - **Apps del sistema:** Calculadora, Calendario con notas, Administrador de tareas.
 - **Mis programas:** programas de Windows (menú Inicio), archivos, carpetas y sitios web en el escritorio. Servidor con lista blanca propia, origen estricto y diálogos nativos; verificado: origen null/ajeno/cross-site -> 403, ruta enviada por la página -> rechazada.

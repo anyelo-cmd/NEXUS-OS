@@ -1,7 +1,9 @@
-/* Panel de administración (Supabase). Solo se registra y se muestra para la cuenta local «anyelo».
+/* Panel de administración (Supabase). Solo se registra y se muestra para la cuenta local del propietario.
    Usa el mismo lenguaje visual que Configuración. Los permisos reales los aplica la base de datos (RLS). */
 (function () {
   const N = window.NEXUS, h = N.h;
+  const TABS = [['sum', '📊', 'Resumen'], ['users', '👥', 'Usuarios'], ['log', '📜', 'Actividad'], ['me', '👤', 'Mi cuenta']];
+  const fmt = (d) => (d ? new Date(d).toLocaleString('es-CO') : '—');
   const getClient = () => N.cloud.client();
 
   function register() {
@@ -111,7 +113,7 @@
     });
   }
 
-  /* El panel solo existe para la cuenta local «anyelo» */
+  /* El panel solo existe para la cuenta local del propietario (los permisos reales los pone la base de datos) */
   const btn = () => document.getElementById('btn-admin');
   const show = (u) => {
     const ok = !!u && !u.remote && String(u.name || '').toLowerCase() === 'anyelo';

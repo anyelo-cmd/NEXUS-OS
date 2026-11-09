@@ -37,7 +37,7 @@
 
   /* ---------- Persistencia ---------- */
   const DB = 'nexus-os';
-  // cada cuenta de la nube tiene su propio espacio local; la cuenta local «anyelo» usa 'workspace'
+  // cada cuenta de la nube tiene su propio espacio local; la cuenta local usa 'workspace'
   const keyFor = (s) => (s && s.remote && s.name ? 'workspace:' + s.name : 'workspace');
   let sess = null; try { sess = JSON.parse(localStorage.getItem('nexus-session') || 'null'); } catch (e) {}
   const KEY = keyFor(sess);

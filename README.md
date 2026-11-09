@@ -11,7 +11,7 @@ Sin dependencias en el frontend (JS puro). Un servidor Python opcional añade im
 Al abrir siempre aparece una **bienvenida con mini tutorial**. Puedes marcar «No mostrar al abrir» y reabrirla con el botón **?** o **F1**.
 
 ## Inicio de sesión y personalización
-- **Cuenta local:** usuario `anyelo` · contraseña `123456789` (cámbiala en Configuración → Cuenta). La contraseña se guarda con hash PBKDF2 en tu navegador. Es un **bloqueo local de la interfaz**, no cifra tus datos: no protege frente a alguien con acceso a tu equipo y a este navegador.
+- **Cuenta local del propietario:** la define quien instala el sistema (cámbiala en Configuración → Cuenta). La contraseña se guarda con hash PBKDF2 en tu navegador. Es un **bloqueo local de la interfaz**, no cifra tus datos: no protege frente a alguien con acceso a tu equipo y a este navegador.
 - 5 intentos fallidos bloquean el acceso 30 s. Puedes bloquear o cerrar sesión desde el menú Inicio.
 - **Encuesta única** en el primer inicio (nombre, uso, estilo, color, tipo de ventanas, escritorio y rendimiento, fondo, bienvenida): coloca tus programas en el escritorio y aplica tus gustos. Se puede repetir en Configuración → Sistema.
 - **Configuración** (⚙): Personalización (tema, color, fondo generado por Python), Ventanas y escritorio, Sistema (rendimiento, copia de seguridad, restablecer), Cuenta y Acerca de.
