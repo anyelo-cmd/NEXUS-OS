@@ -1,0 +1,62 @@
+/* NEXUS OS — capa holográfica: arranque, inicio de sesión con IA, cursor, bordes vivos y profundidad 3D.
+   Los efectos animados solo tocan bordes y marcos: nunca se dibujan encima del contenido de las ventanas. */
+@property --ang{syntax:'<angle>';inherits:false;initial-value:0deg}
+
+/* ---------- cursor ---------- */
+#hcur{position:fixed;left:0;top:0;z-index:2147483647;pointer-events:none}
+html.hcur,html.hcur *{cursor:none!important}
+html.hcur iframe,html.hcur.cur-native,html.hcur.cur-native *{cursor:auto!important}
+
+/* ---------- fondo vivo ---------- */
+#holo-bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+body.live #bg{display:none}
+
+/* ---------- arranque ---------- */
+#boot{background:#030409;overflow:hidden}
+#boot .bt-cv{position:absolute;inset:0;width:100%;height:100%}
+#boot .bt-tx{position:absolute;left:0;right:0;bottom:11vh;text-align:center;display:grid;gap:12px;justify-items:center}
+#boot .bt-tx h1{margin:0;font-weight:200;font-size:clamp(22px,3.4vw,38px);letter-spacing:.7em;padding-left:.7em;color:#fff;text-shadow:0 0 28px var(--accent),0 0 2px var(--accent)}
+#boot .bt-line{font:13px/1 ui-monospace,Consolas,monospace;color:var(--accent);letter-spacing:.12em;min-height:14px}
+#boot .bt-line::after{content:"▌";margin-left:4px;animation:hblink .8s steps(2) infinite}
+#boot .bt-bar{width:min(320px,70vw);height:2px;background:color-mix(in srgb,var(--accent) 22%,transparent);overflow:hidden}
+#boot .bt-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),#fff);box-shadow:0 0 12px var(--accent);transition:width .4s}
+#boot small{color:var(--muted);font-size:11px;letter-spacing:.2em;opacity:.7}
+@keyframes hblink{50%{opacity:0}}
+
+/* ---------- inicio de sesión con IA holográfica ---------- */
+#lock{background:#030409;backdrop-filter:none;-webkit-backdrop-filter:none}
+#lock>*{position:relative;z-index:1}
+#lock>.lk-holo{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.lk-ai{max-width:min(420px,90vw);min-height:44px;padding:10px 14px;border-left:2px solid var(--accent);background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 16%,transparent),transparent);font:13px/1.55 ui-monospace,Consolas,monospace;color:var(--text);letter-spacing:.03em}
+.lk-ai::before{content:"NEXUS ›";display:block;color:var(--accent);font-size:10.5px;letter-spacing:.3em;margin-bottom:3px}
+.lk-ai::after{content:"▌";color:var(--accent);margin-left:2px;animation:hblink .8s steps(2) infinite}
+@media (min-width:1000px){#lock{align-items:flex-end;padding-right:9vw}.lk-clock{text-align:right}.lk-ai{align-self:flex-end}}
+html #lock .lk-card{background:color-mix(in srgb,#05070d 82%,transparent);border:1px solid color-mix(in srgb,var(--accent) 55%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 20%,transparent),0 0 50px -12px var(--accent)}
+
+/* ---------- ventanas, barra y escritorio con profundidad ---------- */
+html:not([data-perf="low"]) .win.focus::before{background:linear-gradient(90deg,transparent 0,var(--ac) 25%,#fff 50%,var(--ac) 75%,transparent 100%) 0 0/200% 100%;opacity:.95;animation:hbar 3.2s linear infinite}
+html:not([data-perf="low"]) .win.focus::after,html:not([data-perf="low"])[data-theme] .win.focus::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;pointer-events:none;z-index:8;opacity:1;
+  background:conic-gradient(from var(--ang),transparent 0 62%,var(--accent) 80%,#fff 90%,transparent 96%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);animation:hspin 6s linear infinite}
+html:not([data-perf="low"])[data-theme] .win.max.focus::after,html:not([data-perf="low"])[data-theme] .win.fs.focus::after{opacity:0}
+html .win.focus{box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 70%,transparent),0 0 60px -14px var(--accent),0 24px 60px -20px #000}
+@keyframes hspin{to{--ang:360deg}}
+@keyframes hbar{to{background-position:-200% 0}}
+
+html #taskbar::after{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;background:linear-gradient(90deg,transparent 0,var(--accent) 25%,#fff 50%,var(--accent) 75%,transparent 100%) 0 0/200% 100%;animation:hbar 5s linear infinite;opacity:.85;pointer-events:none}
+html #taskbar .tb-start{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 55%,transparent),0 0 22px -8px var(--accent)}
+html #taskbar .task.act{box-shadow:inset 0 -2px 0 var(--accent),0 0 18px -8px var(--accent)}
+
+html .d-icon{transition:transform .28s cubic-bezier(.2,.8,.2,1),background .2s,border-color .2s,box-shadow .28s}
+html .d-icon:hover{transform:perspective(520px) translateZ(16px) rotateX(9deg) translateY(-4px);box-shadow:0 16px 28px -14px var(--accent),0 0 0 1px color-mix(in srgb,var(--ac) 45%,transparent)}
+html .d-icon .ic,html .d-icon>span:first-child{filter:drop-shadow(0 0 7px color-mix(in srgb,var(--ac) 70%,transparent))}
+html:not([data-perf="low"]) .d-icon{animation:hfloat 6s ease-in-out infinite}
+html:not([data-perf="low"]) .d-icon:nth-child(2n){animation-delay:-1.6s}html:not([data-perf="low"]) .d-icon:nth-child(3n){animation-delay:-3.1s}
+html .d-icon:hover{animation:none}
+@keyframes hfloat{50%{translate:0 -3px}}
+
+html #launcher{border:1px solid color-mix(in srgb,var(--accent) 55%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 18%,transparent),0 0 60px -16px var(--accent),0 30px 70px -20px #000}
+html .btn.primary{box-shadow:0 0 22px -8px var(--accent)}
+html .btn.primary:hover{box-shadow:0 0 30px -4px var(--accent)}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}

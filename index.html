@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es" data-theme="ultron">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NEXUS OS</title>
+<link rel="icon" href="assets/logo.svg">
+<link rel="stylesheet" href="css/nexus.css">
+<link rel="stylesheet" href="css/ultron.css">
+<link rel="stylesheet" href="css/desktop.css">
+<link rel="stylesheet" href="css/system.css">
+<link rel="stylesheet" href="css/holo.css">
+<link rel="stylesheet" href="css/apps.css">
+<link rel="stylesheet" href="css/learn.css">
+<link rel="stylesheet" href="css/admin.css">
+<link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+
+<!-- Arranque holográfico -->
+<div id="boot">
+  <canvas class="bt-cv"></canvas>
+  <div class="bt-tx">
+    <h1>NEXUS OS</h1>
+    <div class="bt-line">&gt; Iniciando núcleo cognitivo…</div>
+    <div class="bt-bar"><i></i></div>
+    <small>CLIC O TECLA PARA OMITIR</small>
+  </div>
+</div>
+
+<!-- Fondos -->
+<canvas id="holo-bg" style="display:none"></canvas>
+<canvas id="bg"></canvas>
+<div id="spot"></div>
+
+<!-- Lienzo -->
+<div id="viewport">
+  <div id="world">
+    <svg id="links" width="1" height="1"></svg>
+  </div>
+  <div id="cursors"></div>
+</div>
+
+<!-- Marca -->
+<div id="brand">
+  <div class="logo"><img src="assets/logo.svg" alt=""></div>
+  <div><b>NEXUS OS</b><small>escritorio infinito</small></div>
+</div>
+
+<canvas id="minimap" width="380" height="248"></canvas>
+
+<!-- Barra de tareas -->
+<div id="taskbar">
+  <button class="tb-start" id="btn-launch" title="Inicio"><img src="assets/logo.svg" alt=""><span>Inicio</span></button>
+  <button class="tb-search" id="btn-search">🔍 Buscar…</button>
+  <div class="spacer"></div>
+  <div id="tasks"></div>
+  <div id="tray">
+    <span class="tb-info" id="peers">● 1</span>
+    <span class="tb-info" title="Ventanas abiertas">▭ <span id="wincount">0</span></span>
+    <span class="tb-info" id="zoomlbl">100%</span>
+    <button class="tb-btn" id="btn-perf" title="Rendimiento">⚡</button>
+    <button class="tb-btn" id="btn-help" title="Ayuda (F1)">?</button>
+    <button class="tb-btn" id="btn-settings" title="Configuración">⚙</button>
+    <button class="tb-btn accent" id="btn-admin" title="Panel de administración" hidden>🛡 Admin</button>
+    <button class="tb-clock" id="btn-clock" title="Calendario"><b id="clock">--:--</b><small id="date"></small></button>
+  </div>
+</div>
+
+<div id="launcher" hidden></div>
+<div id="toasts"></div>
+<input type="file" id="file-import" accept=".json,.nexus" hidden>
+
+<script src="js/core.js"></script>
+<script src="js/cloud.js"></script>
+<script src="js/canvas.js"></script>
+<script src="js/fx.js"></script>
+<script src="js/holo.js"></script>
+<script src="js/cursor.js"></script>
+<script src="js/apps/notes.js"></script>
+<script src="js/apps/ide.js"></script>
+<script src="js/apps/media.js"></script>
+<script src="js/apps/browser.js"></script>
+<script src="js/apps/learn-path.js"></script>
+<script src="js/apps/learn-tracks.js"></script>
+<script src="js/apps/learn-web.js"></script>
+<script src="js/apps/learn.js"></script>
+<script src="js/apps/settings.js"></script>
+<script src="js/apps/tools.js"></script>
+<script src="js/apps/winapps.js"></script>
+<script src="js/onboarding.js"></script>
+<script src="js/desktop.js"></script>
+<script src="js/system.js"></script>
+<script src="js/apps/admin.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

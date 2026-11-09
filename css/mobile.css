@@ -1,0 +1,96 @@
+/* ===== Adaptación a móviles y tablets (se carga al final para poder sobrescribir) ===== */
+html,body{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overscroll-behavior:none}
+button,.btn,.tb-btn,.task,.l-item{touch-action:manipulation}
+
+/* ---- tablet ---- */
+@media (max-width:1024px){
+  #minimap{display:none}
+  .sv-card,.w-card{max-width:calc(100vw - 24px)}
+}
+
+/* ---- teléfono ---- */
+@media (max-width:760px){
+  input,select,textarea,.lk-in{font-size:16px!important}          /* evita el zoom automático de iOS al escribir */
+  #brand,#minimap,#cursors{display:none!important}
+
+  /* barra de tareas: lo esencial */
+  #tray .tb-info,#btn-perf,#btn-help{display:none}
+  .tb-clock small{display:none}
+  .tb-clock{padding:2px 6px}
+  html .task{min-width:40px;max-width:112px;padding:0 8px}
+  html .tb-btn{min-width:40px}
+  #btn-admin{font-size:0;padding:0 10px}
+  #btn-admin::before{content:"🛡";font-size:17px}
+
+  /* menú Inicio como hoja inferior */
+  html #launcher{left:0;right:0;bottom:48px;width:100%;max-height:calc(100dvh - 60px);border-radius:12px 12px 0 0}
+  .l-item{min-height:48px}
+  .l-user .btn{min-width:42px;min-height:40px}
+
+  /* iconos del escritorio: cuadrícula táctil (un toque abre) */
+  html #desktop{display:grid;grid-template-columns:repeat(4,1fr);align-content:start;left:6px;right:6px;top:10px;bottom:56px;gap:2px;overflow-y:auto;pointer-events:auto}
+  html[data-icons="off"] #desktop{display:none}
+  .d-icon{width:auto;padding:8px 2px}
+  .d-ic{width:50px;height:50px;font-size:26px}
+  .d-lbl{font-size:11px}
+
+  /* ventanas */
+  .win-head{padding:6px 8px}
+  .win-head button{min-width:40px;min-height:38px}
+  .win .resize{display:none!important}
+  .win-sub{display:none}
+  .toolbar,.tabs{overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}
+  .toolbar>*,.tabs>*{flex:none}
+  .kanban{overflow-x:auto}
+  .statusbar{overflow-x:auto;white-space:nowrap}
+
+  /* Configuración y Administración: menú lateral → pestañas arriba */
+  .app.st{flex-direction:column}
+  .st-side{width:auto;flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--border);padding:6px;scrollbar-width:none}
+  .st-head{display:none}
+  .st-nav{white-space:nowrap;flex:none;padding:9px 12px}
+  .st-nav.on{box-shadow:inset 0 -3px 0 var(--accent)}
+  .st-main{padding:14px 12px}
+  .st-row{flex-wrap:wrap;gap:8px}
+  .st-ctl,.st-themes,.st-colors{justify-content:flex-start;max-width:100%}
+  .st-row small{max-width:none}
+  .adm-stats{grid-template-columns:repeat(2,1fr)}
+  .adm-row{grid-template-columns:1fr 1fr;gap:6px}
+  .adm-row .st-btns{grid-column:1/-1;flex-wrap:wrap}
+
+  /* Academia, calculadora, calendario, tareas */
+  .lrn-stats{grid-template-columns:repeat(2,1fr)}
+  .lrn-stages{grid-template-columns:repeat(5,1fr)}
+  .lrn-pairs,.sy-pairs{grid-template-columns:1fr}
+  .sy-stg,.sy-badges{grid-template-columns:repeat(2,1fr)}
+  .sy-go{min-width:0;width:100%}
+  .tm-th,.tm-row{grid-template-columns:1fr 84px}
+  .tm-th>*:nth-child(3),.tm-row>*:nth-child(3){display:none}
+  .br-grid{grid-template-columns:1fr 1fr}
+
+  /* acceso, encuesta y bienvenida */
+  #lock{padding:14px;gap:10px;overflow-y:auto;justify-content:flex-start}
+  .lk-time{font-size:min(20vw,76px)}.lk-date{font-size:14px}
+  .lk-card{padding:20px 16px;width:min(360px,94vw)}
+  .lk-ai{max-width:94vw;font-size:13px}
+  #survey{padding:8px}.sv-card{padding:16px 14px}
+  .w-card{padding:20px 16px 16px}.w-card h2{font-size:21px}.w-card li{padding:7px 9px}
+  .w-actions{flex-wrap:wrap;gap:8px}
+
+  /* avisos sobre la barra de tareas */
+  #toasts{left:8px;right:8px;bottom:56px}
+  .ctx{width:min(210px,calc(100vw - 16px))}
+}
+
+/* pantallas muy estrechas */
+@media (max-width:380px){
+  html #desktop{grid-template-columns:repeat(3,1fr)}
+  .lrn-stages{grid-template-columns:repeat(4,1fr)}
+}
+
+/* móvil en horizontal: poca altura */
+@media (max-height:480px) and (max-width:900px){
+  #lock .lk-clock{display:none}
+  .w-card{max-height:92dvh}
+}

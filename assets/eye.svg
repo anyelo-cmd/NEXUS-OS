@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 120"><defs>
+<filter id="b" x="-40%" y="-80%" width="180%" height="260%"><feGaussianBlur stdDeviation="9"/></filter>
+<linearGradient id="s" x1="0" x2="1"><stop offset="0" stop-color="#ff2a3d" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#ff2a3d" stop-opacity="0"/></linearGradient></defs>
+<g><animate attributeName="opacity" values="1;.78;1;.9;1" dur="3.2s" repeatCount="indefinite"/>
+<polygon points="40,34 200,58 200,86 54,74" fill="#ff2a3d" filter="url(#b)"/><polygon points="440,34 280,58 280,86 426,74" fill="#ff2a3d" filter="url(#b)"/>
+<polygon points="40,34 200,58 200,86 54,74" fill="#ff2a3d"/><polygon points="440,34 280,58 280,86 426,74" fill="#ff2a3d"/>
+<polygon points="40,34 200,58 200,86 54,74" fill="#fff" fill-opacity=".85" transform="translate(6,6) scale(.92)"/><polygon points="440,34 280,58 280,86 426,74" fill="#fff" fill-opacity=".85" transform="translate(30,6) scale(.92)"/></g>
+<rect x="30" y="52" width="420" height="3" fill="url(#s)"><animate attributeName="y" values="14;100;14" dur="2.6s" repeatCount="indefinite"/></rect></svg>

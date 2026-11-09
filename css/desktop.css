@@ -1,0 +1,55 @@
+/* Escritorio estilo PC (carga después del tema, por eso usa html para ganar especificidad) */
+html #taskbar{left:0;right:0;bottom:0;transform:none;max-width:none;width:100%;height:48px;border-radius:0;border-width:1px 0 0;padding:0 8px;box-shadow:0 -8px 30px -12px rgba(0,0,0,.8)}
+html #taskbar .spacer:first-of-type{display:none}
+html #tasks{flex:1;justify-content:flex-start;overflow-x:auto;gap:4px}
+html #taskbar .spacer{flex:0 0 6px}
+html .task{max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border-bottom:2px solid var(--ac)}
+html .task.min{border-bottom-color:transparent;opacity:.65}
+html #launcher{left:8px;bottom:56px;transform:none;width:min(420px,calc(100vw - 16px));max-height:min(560px,calc(100vh - 80px));display:flex;flex-direction:column;gap:8px}
+html #launcher[hidden]{display:none}
+.l-list{display:grid;gap:6px;overflow:auto;flex:1}.l-list .empty{padding:20px;text-align:center;color:var(--muted)}
+.l-search{width:100%;padding:10px 12px!important}
+.l-foot{display:flex;gap:6px;border-top:1px solid var(--border);padding-top:8px}.l-foot .btn{flex:1}
+html #minimap{bottom:62px}
+html #brand{left:16px}
+
+/* iconos de escritorio */
+#desktop{position:fixed;left:14px;top:84px;bottom:64px;z-index:3;display:flex;flex-direction:column;flex-wrap:wrap;align-content:flex-start;gap:6px;pointer-events:none}
+#desktop[hidden]{display:none}
+.d-icon{pointer-events:auto;width:86px;padding:8px 4px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:default;border:1px solid transparent;border-radius:3px;outline:0;user-select:none}
+.d-icon:hover{background:color-mix(in srgb,var(--ac) 14%,transparent);border-color:color-mix(in srgb,var(--ac) 40%,transparent)}
+.d-icon.sel,.d-icon:focus-visible{background:color-mix(in srgb,var(--ac) 28%,transparent);border-color:var(--ac)}
+.d-ic{font-size:30px;width:52px;height:52px;display:grid;place-items:center;background:linear-gradient(145deg,color-mix(in srgb,var(--ac) 40%,#000),color-mix(in srgb,var(--ac) 12%,#000));border:1px solid color-mix(in srgb,var(--ac) 60%,transparent);box-shadow:0 6px 18px -8px var(--ac)}
+.d-lbl{font-size:12px;text-align:center;text-shadow:0 1px 4px #000,0 0 8px #000;line-height:1.2}
+@media(max-width:700px){#desktop{display:none}}
+
+/* ventana maximizada */
+.win.max{border-radius:0;box-shadow:none}.win.max .resize{display:none}.win.max .win-head{cursor:default}
+
+/* menú contextual */
+.ctx{position:fixed;z-index:2000001;width:210px;padding:6px;display:grid;gap:1px;background:var(--glass);backdrop-filter:blur(16px);border:1px solid var(--border);box-shadow:var(--shadow),0 0 30px -12px var(--accent)}
+.ctx button{display:flex;gap:10px;align-items:center;padding:7px 10px;border:0;background:none;color:var(--text);font:inherit;font-size:13px;text-align:left;cursor:pointer}
+.ctx button:hover{background:color-mix(in srgb,var(--accent) 24%,transparent)}.ctx button span{width:20px;text-align:center}
+.ctx hr{border:0;border-top:1px solid var(--border);margin:4px 0;width:100%}.ctx-h{font-size:10px;letter-spacing:.2em;color:var(--accent);padding:4px 10px}
+
+/* historial del navegador: lienzo infinito */
+.br-wrap{flex:1;min-height:0;position:relative}.br-wrap .br-stage{position:absolute;inset:0}
+.br-hist{position:absolute;inset:0;z-index:5;background:#070304;display:flex;flex-direction:column}.br-hist[hidden]{display:none}
+.bh-view{position:absolute;inset:0;overflow:hidden;cursor:grab;touch-action:none;background-image:radial-gradient(color-mix(in srgb,var(--accent) 40%,transparent) 1.2px,transparent 1.5px);background-size:28px 28px}
+.bh-view:active{cursor:grabbing}
+.bh-world{position:absolute;left:0;top:0;transform-origin:0 0;width:1px;height:1px}
+.bh-svg{position:absolute;left:0;top:0;width:1px;height:1px;overflow:visible;color:var(--accent);pointer-events:none}
+.bh-svg path.l{fill:none;stroke:currentColor;stroke-width:2;stroke-opacity:.7;stroke-dasharray:7 5;animation:bhflow 1.2s linear infinite}
+@keyframes bhflow{to{stroke-dashoffset:-12}}
+.bh-card{position:absolute;width:210px;height:104px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;cursor:pointer;user-select:none;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--border);border-left:3px solid var(--accent);box-shadow:0 10px 26px -14px #000;transition:box-shadow .15s,opacity .2s}
+.bh-card:hover{box-shadow:0 0 0 1px var(--accent),0 12px 30px -10px var(--accent)}.bh-card.cur{outline:2px solid var(--accent);outline-offset:3px}.bh-card.dim{opacity:.2}
+.bh-top{display:flex;gap:8px;align-items:center}.bh-top b{flex:1;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bh-fav{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:12px;font-weight:700;flex:none}
+.bh-x{background:none;border:0;color:var(--muted);cursor:pointer;opacity:0;padding:0 4px}.bh-card:hover .bh-x{opacity:1}.bh-x:hover{color:var(--bad)}
+.bh-url{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:ui-monospace,Consolas,monospace;font-size:10.5px}.bh-t{color:var(--accent);margin-top:auto;font-size:10.5px}
+.bh-bar{position:absolute;left:10px;right:10px;top:10px;display:flex;gap:6px;align-items:center;padding:6px 8px;background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--border);z-index:2}
+.bh-bar b{letter-spacing:.2em;font-size:11px;color:var(--accent)}.bh-bar small{margin-left:auto;color:var(--muted);white-space:nowrap}.bh-q{flex:1;min-width:80px;max-width:240px}
+.bh-empty{position:absolute;left:120px;top:120px;width:360px;color:var(--muted)}
+
+html #launcher{animation:lup .2s ease}@keyframes lup{from{opacity:0;transform:translateY(10px)}}
+body.has-max #desktop,body.has-max #brand,body.has-max #minimap{display:none}

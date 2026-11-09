@@ -1,0 +1,160 @@
+/* NEXUS OS — "UI kit holográfico": lenguaje visual común de todas las apps.
+   Esquinas biseladas, marcos con corchetes, brillo de neón, tipografía técnica y una forma 3D viva por app.
+   Se carga la última; solo decora fondos y bordes, el texto conserva su contraste. */
+:root{--cut:8px}
+.cut{clip-path:polygon(var(--cut) 0,100% 0,100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,0 100%,0 var(--cut))}
+
+/* ---------- ventana: cabecera con holograma 3D ---------- */
+html[data-theme] .win .win-body{background:transparent}
+html[data-theme] .win{background:
+  radial-gradient(1200px 520px at 85% 115%,color-mix(in srgb,var(--ac) 12%,transparent),transparent 70%),
+  linear-gradient(color-mix(in srgb,var(--ac) 5%,transparent) 1px,transparent 1px) 0 0/100% 34px,
+  var(--panel)}
+.win-mark{position:absolute;left:0;right:0;top:0;bottom:0;width:100%;height:100%;z-index:0;pointer-events:none}
+html[data-theme] .win-head{position:relative;z-index:2;padding:5px 10px;background:
+  linear-gradient(90deg,color-mix(in srgb,var(--ac) 30%,var(--panel2)) 0,var(--panel2) 55%,color-mix(in srgb,var(--ac) 12%,var(--panel2)) 100%);
+  border-bottom:1px solid color-mix(in srgb,var(--ac) 55%,transparent);box-shadow:0 6px 18px -12px var(--ac)}
+html[data-theme] .win-head::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:3px;pointer-events:none;
+  background:repeating-linear-gradient(90deg,color-mix(in srgb,var(--ac) 70%,transparent) 0 1px,transparent 1px 12px)}
+.win-ic{display:grid!important;place-items:center;width:34px;height:32px;flex:none;font-size:0}
+.win-mini{width:32px;height:32px;display:block;filter:drop-shadow(0 0 5px var(--ac))}
+html[data-theme] .win-title{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-shadow:0 0 12px color-mix(in srgb,var(--ac) 70%,transparent)}
+.win-sub{flex:1;min-width:0;font:10.5px ui-monospace,Consolas,monospace;letter-spacing:.08em;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-left:10px;border-left:1px solid color-mix(in srgb,var(--ac) 40%,transparent)}
+@media (max-width:900px){.win-sub{display:none}}
+html[data-theme] .win-head button{border-radius:0;clip-path:polygon(5px 0,100% 0,100% calc(100% - 5px),calc(100% - 5px) 100%,0 100%,0 5px)}
+
+/* corchetes de esquina siempre visibles + marco de energía */
+html[data-theme] .win:not(.fs)::after{opacity:1;content:"";position:absolute;inset:-1px;pointer-events:none;z-index:9;
+  background:
+   linear-gradient(var(--ac),var(--ac)) top left/22px 2px no-repeat,linear-gradient(var(--ac),var(--ac)) top left/2px 22px no-repeat,
+   linear-gradient(var(--ac),var(--ac)) top right/22px 2px no-repeat,linear-gradient(var(--ac),var(--ac)) top right/2px 22px no-repeat,
+   linear-gradient(var(--ac),var(--ac)) bottom left/22px 2px no-repeat,linear-gradient(var(--ac),var(--ac)) bottom left/2px 22px no-repeat,
+   linear-gradient(var(--ac),var(--ac)) bottom right/22px 2px no-repeat,linear-gradient(var(--ac),var(--ac)) bottom right/2px 22px no-repeat;
+  filter:drop-shadow(0 0 4px var(--ac))}
+
+/* ---------- barras, botones, pestañas ---------- */
+.win .toolbar{position:relative;background:linear-gradient(180deg,color-mix(in srgb,var(--ac) 11%,var(--panel2)),color-mix(in srgb,var(--panel) 92%,transparent));
+  border-bottom:1px solid color-mix(in srgb,var(--ac) 40%,transparent);box-shadow:0 8px 20px -16px var(--ac)}
+.win .btn{border-radius:0;--cut:7px;clip-path:polygon(var(--cut) 0,100% 0,100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,0 100%,0 var(--cut));
+  background:linear-gradient(180deg,color-mix(in srgb,var(--ac) 16%,var(--panel2)),var(--panel2));border:1px solid color-mix(in srgb,var(--ac) 50%,transparent);
+  box-shadow:inset 0 0 12px -6px var(--ac);letter-spacing:.02em;transition:background .2s,box-shadow .2s,transform .12s}
+.win .btn:hover{background:linear-gradient(180deg,color-mix(in srgb,var(--ac) 32%,var(--panel2)),color-mix(in srgb,var(--ac) 10%,var(--panel2)));box-shadow:inset 0 0 18px -4px var(--ac);transform:none}
+.win .btn:active{transform:scale(.97)}
+.win .btn.primary{background:linear-gradient(105deg,var(--accent) 0 40%,color-mix(in srgb,var(--accent) 60%,#fff) 50%,var(--accent) 60% 100%) 0 0/250% 100%;border-color:var(--accent);box-shadow:inset 0 0 14px -4px #fff6}
+.win .btn.primary:hover{animation:hshine .9s ease}
+@keyframes hshine{from{background-position:100% 0}to{background-position:0 0}}
+.win .btn.danger{border-color:color-mix(in srgb,var(--bad) 70%,transparent)}
+.win .seg{border-radius:0;border-color:color-mix(in srgb,var(--ac) 45%,transparent);clip-path:polygon(7px 0,100% 0,100% calc(100% - 7px),calc(100% - 7px) 100%,0 100%,0 7px)}
+.win .seg button.on{background:linear-gradient(180deg,color-mix(in srgb,var(--ac) 85%,#fff),var(--ac));box-shadow:inset 0 0 12px #fff4}
+.win .chip{border-radius:0;clip-path:polygon(5px 0,100% 0,100% calc(100% - 5px),calc(100% - 5px) 100%,0 100%,0 5px)}
+.win .badge{border-radius:0;letter-spacing:.08em;text-transform:uppercase;font-size:10px}
+.win .tabs{background:linear-gradient(180deg,color-mix(in srgb,var(--ac) 8%,var(--panel2)),var(--panel2));border-bottom:1px solid color-mix(in srgb,var(--ac) 45%,transparent)}
+.win .tab{border-radius:0;clip-path:polygon(8px 0,100% 0,100% 100%,0 100%,0 8px);letter-spacing:.04em}
+.win .tab.on,.win .tab.active{background:linear-gradient(180deg,color-mix(in srgb,var(--ac) 28%,transparent),transparent);box-shadow:inset 0 2px 0 var(--ac),0 6px 14px -10px var(--ac)}
+.win .statusbar{font:10px ui-monospace,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;border-top:1px solid color-mix(in srgb,var(--ac) 40%,transparent);
+  background:linear-gradient(0deg,color-mix(in srgb,var(--ac) 8%,var(--panel2)),var(--panel));position:relative;z-index:2}
+.win .statusbar::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok);align-self:center;animation:hpulse 2s ease-in-out infinite}
+@keyframes hpulse{50%{opacity:.35}}
+
+/* ---------- campos ---------- */
+.win select,.win input:not([type]),.win input[type=text],.win input[type=search],.win input[type=url],.win input[type=password],.win input[type=number]{
+  background:color-mix(in srgb,var(--bg) 72%,transparent);border:1px solid color-mix(in srgb,var(--ac) 35%,transparent);border-bottom:2px solid var(--ac);border-radius:0;outline:0;transition:box-shadow .2s,background .2s}
+.win select:focus,.win input:focus{box-shadow:0 0 0 1px color-mix(in srgb,var(--ac) 60%,transparent),0 6px 18px -8px var(--ac);background:color-mix(in srgb,var(--ac) 8%,var(--bg))}
+
+/* ---------- tarjetas con corchetes ---------- */
+.win .card,.win .kpi,.win .tm-card,.win .wa-card,.win .br-card,.win .st-about,.win .st-user{border:1px solid color-mix(in srgb,var(--ac) 28%,transparent);border-radius:0;
+  background:
+   linear-gradient(var(--ac),var(--ac)) top left/12px 2px no-repeat,linear-gradient(var(--ac),var(--ac)) top left/2px 12px no-repeat,
+   linear-gradient(var(--ac),var(--ac)) bottom right/12px 2px no-repeat,linear-gradient(var(--ac),var(--ac)) bottom right/2px 12px no-repeat,
+   linear-gradient(135deg,color-mix(in srgb,var(--ac) 10%,var(--panel2)),color-mix(in srgb,var(--panel) 90%,transparent))}
+.win .wa-card:hover,.win .br-card:hover,.win .card:hover{border-color:var(--ac);box-shadow:0 0 26px -10px var(--ac),inset 0 0 22px -12px var(--ac)}
+.win .kpi b,.win .tm-card b{text-shadow:0 0 14px var(--ac)}
+
+/* ---------- barras de desplazamiento ---------- */
+.win ::-webkit-scrollbar{width:8px;height:8px}
+.win ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--accent),color-mix(in srgb,var(--accent) 35%,transparent));border-radius:0}
+.win ::-webkit-scrollbar-track{background:color-mix(in srgb,var(--ac) 6%,transparent)}
+
+/* ---------- Documento ---------- */
+.win .tx-wrap{background:radial-gradient(900px 420px at 50% -8%,color-mix(in srgb,var(--ac) 16%,transparent),transparent 70%)}
+.win .tx-wrap h1,.win .tx-wrap .t:first-child{text-shadow:0 0 22px color-mix(in srgb,var(--ac) 55%,transparent)}
+.win .blk:hover{background:linear-gradient(90deg,color-mix(in srgb,var(--ac) 9%,transparent),transparent)}
+.win .kcol{border:1px solid color-mix(in srgb,var(--ac) 30%,transparent);border-radius:0;background:linear-gradient(180deg,color-mix(in srgb,var(--ac) 8%,var(--panel2)),transparent)}
+.win .kcard{border-radius:0;border-left:3px solid var(--ac);box-shadow:0 0 18px -10px var(--ac)}
+
+/* ---------- Código ---------- */
+.win .ed{background:color-mix(in srgb,var(--bg) 78%,transparent);box-shadow:inset 0 0 40px -22px var(--ac)}
+.win .mono{text-shadow:0 0 10px color-mix(in srgb,var(--ac) 25%,transparent)}
+
+/* ---------- Navegador ---------- */
+.win .br-url,.win .bh-url{border:1px solid color-mix(in srgb,var(--ac) 50%,transparent);border-radius:0;box-shadow:inset 0 0 16px -10px var(--ac)}
+.win .br-prog{background:linear-gradient(90deg,transparent,var(--accent),#fff,var(--accent),transparent);box-shadow:0 0 12px var(--accent)}
+.win .br-start{background:radial-gradient(700px 360px at 50% 0%,color-mix(in srgb,var(--ac) 18%,transparent),transparent 70%)}
+
+/* ---------- Academia ---------- */
+.win .lrn-body{background:radial-gradient(800px 420px at 50% -10%,color-mix(in srgb,var(--cc,var(--ac)) 14%,transparent),transparent 70%)}
+.win .lrn-dot{border-radius:0;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);box-shadow:none;background:linear-gradient(160deg,color-mix(in srgb,var(--cc) 75%,#fff),var(--cc))}
+.win .lrn-node{filter:drop-shadow(0 0 8px color-mix(in srgb,var(--cc) 70%,transparent))}
+.win .lrn-node.lock{filter:none}.win .lrn-node.lock .lrn-dot{background:#3a3f4a}
+.win .lrn-node.cur .lrn-dot{animation:hpulse 1.6s ease-in-out infinite}
+.win .lrn-opt{border-radius:0;border-width:1px;border-bottom-width:1px;clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);background:linear-gradient(90deg,color-mix(in srgb,var(--cc) 12%,transparent),transparent)}
+.win .lrn-opt.sel{background:linear-gradient(90deg,color-mix(in srgb,var(--cc) 42%,transparent),color-mix(in srgb,var(--cc) 8%,transparent));box-shadow:inset 3px 0 0 var(--cc)}
+.win .lrn-stat,.win .lrn-sum>div,.win .lrn-stg,.win .lrn-course,.win .lrn-tip,.win .lrn-code,.win .lrn-codefill,.win .lrn-line{border-radius:0}
+.win .lrn-stat{border-color:color-mix(in srgb,var(--ac) 40%,transparent);background:linear-gradient(180deg,color-mix(in srgb,var(--ac) 12%,transparent),transparent)}
+.win .lrn-stat b{text-shadow:0 0 14px var(--ac)}
+.win .lrn-head{border-left-width:4px}
+.win .lrn-bar{border-radius:0}.win .lrn-bar i{border-radius:0;box-shadow:0 0 14px var(--cc,var(--accent))}
+.win .lrn-stage h3{text-shadow:0 0 18px color-mix(in srgb,var(--cc) 40%,transparent)}
+.win .lrn-code{border-left:3px solid var(--cc,var(--ac));background:linear-gradient(90deg,color-mix(in srgb,var(--cc,var(--ac)) 9%,#05070b),#05070b)}
+
+/* ---------- Configuración ---------- */
+.win .st-nav button,.win .st-side button{border-radius:0;border-left:3px solid transparent;transition:.2s}
+.win .st-nav button.on,.win .st-side button.on{border-left-color:var(--accent);background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 26%,transparent),transparent);text-shadow:0 0 10px var(--accent)}
+.win .st-row{border-bottom:1px solid transparent;border-image:linear-gradient(90deg,color-mix(in srgb,var(--ac) 45%,transparent),transparent) 1}
+.win .st-sw{border-radius:0;clip-path:polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px)}
+.win .st-sw.on{box-shadow:0 0 16px -2px var(--accent)}
+.win .st-theme{border-radius:0}
+
+/* ---------- Calculadora ---------- */
+.win .cc-disp{font-family:ui-monospace,Consolas,monospace;border:1px solid color-mix(in srgb,var(--ac) 55%,transparent);border-radius:0;background:linear-gradient(180deg,#02040a,color-mix(in srgb,var(--ac) 8%,#02040a));text-shadow:0 0 16px var(--accent);box-shadow:inset 0 0 30px -14px var(--accent)}
+.win .cc-k{border-radius:0;clip-path:polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px);background:linear-gradient(180deg,color-mix(in srgb,var(--ac) 14%,var(--panel2)),var(--panel2));box-shadow:inset 0 0 14px -8px var(--ac);transition:.15s}
+.win .cc-k:hover{box-shadow:inset 0 0 22px -4px var(--ac)}
+.win .cc-k.op{background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 40%,var(--panel2)),color-mix(in srgb,var(--accent) 16%,var(--panel2)))}
+.win .cc-k.eq{background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 80%,#fff),var(--accent));box-shadow:0 0 20px -2px var(--accent)}
+.win .cc-hist{font-family:ui-monospace,Consolas,monospace;border-left:2px solid color-mix(in srgb,var(--ac) 40%,transparent)}
+
+/* ---------- Calendario ---------- */
+.win .cal-d{border-radius:0;clip-path:polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px);background:color-mix(in srgb,var(--ac) 5%,transparent);border-color:color-mix(in srgb,var(--ac) 14%,transparent)}
+.win .cal-d:hover{background:color-mix(in srgb,var(--ac) 22%,transparent);box-shadow:inset 0 0 14px -6px var(--ac)}
+.win .cal-d.today{box-shadow:inset 0 0 0 1px var(--accent),inset 0 0 16px -4px var(--accent)}
+.win .cal-d.sel{background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 85%,#fff),var(--accent));box-shadow:0 0 18px -2px var(--accent)}
+.win .cal-head{text-shadow:0 0 16px var(--accent);letter-spacing:.1em;text-transform:uppercase}
+.win .cal-dow{letter-spacing:.14em;color:var(--ac)}
+
+/* ---------- Administrador de tareas ---------- */
+.win .tm-th{letter-spacing:.14em;text-transform:uppercase;font-size:10px;color:var(--ac)}
+.win .tm-row:hover{background:linear-gradient(90deg,color-mix(in srgb,var(--ac) 14%,transparent),transparent)}
+
+/* ---------- Mis programas ---------- */
+.win .wa-ic{filter:drop-shadow(0 0 8px var(--ac))}
+.win .wa-t{letter-spacing:.06em}
+
+/* ---------- menú Inicio ---------- */
+html #launcher .l-item{border-radius:0;border-left:2px solid transparent;transition:.18s}
+html #launcher .l-item:hover{border-left-color:var(--ac);background:linear-gradient(90deg,color-mix(in srgb,var(--ac) 22%,transparent),transparent)}
+html #launcher .l-search{border-radius:0;border-bottom:2px solid var(--accent)}
+
+html[data-perf="low"] .win-mini{filter:none}
+html[data-perf="low"] html[data-theme] .win::after{filter:none}
+
+/* ---------- ajustes tras revisar capturas ---------- */
+.win.dlg .win-sub{display:none}
+.win.dlg .win-title{letter-spacing:.12em}
+.win .seg button{white-space:nowrap}
+.win .st-ctl{flex-wrap:wrap;justify-content:flex-end}
+.win input[type=range]{accent-color:var(--accent)}
+.win input[type=file]{color:var(--muted);font-size:12px}
+.win input[type=file]::file-selector-button{margin-right:10px;padding:5px 12px;border:1px solid color-mix(in srgb,var(--ac) 55%,transparent);border-radius:0;color:var(--text);cursor:pointer;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--ac) 22%,var(--panel2)),var(--panel2));clip-path:polygon(7px 0,100% 0,100% calc(100% - 7px),calc(100% - 7px) 100%,0 100%,0 7px)}
+.win .app canvas{box-shadow:0 0 0 1px color-mix(in srgb,var(--ac) 50%,transparent),0 0 34px -12px var(--ac)}
+.win .cal-head{text-transform:uppercase!important}
